@@ -31,13 +31,19 @@ RUN apt-get install -y curl libxml2-dev libxslt-dev libcurl4-openssl-dev libread
 # install drush make requirements
 RUN apt-get install -y unzip php5 php5-cli php5-curl git
 
-# install drush
-RUN curl -sS https://getcomposer.org/installer | php
+# drush: instead of installing a package, pull via composer into /opt/composer
+# http://www.whaaat.com/installing-drush-7-using-composer
+RUN curl -sS https://getcomposer.org/installer | php 
 RUN mv composer.phar /usr/local/bin/composer
-RUN composer global require drush/drush:6.*
-RUN echo 'PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
+RUN COMPOSER_HOME=/opt/composer composer --quiet global require drush/drush:dev-master
 RUN ln -s /opt/composer/vendor/drush/drush/drush /bin/drush
-#RUN /bin/drush --version
+# Add drush comand https://www.drupal.org/project/registry_rebuild
+RUN wget http://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.2.tar.gz && \
+    tar xzf registry_rebuild-7.x-2.2.tar.gz && \
+    rm registry_rebuild-7.x-2.2.tar.gz && \
+    mv registry_rebuild /opt/composer/vendor/drush/drush/commands
+#RUN sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' /root/.bashrc
+RUN /bin/drush --version
 
 # Download Ruby and compile it
 #RUN mkdir /tmp/ruby
