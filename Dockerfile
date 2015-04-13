@@ -27,7 +27,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y curl libxml2-dev libxslt-dev libcurl4-openssl-dev libreadline6-dev libssl-dev patch build-essential zlib1g-dev openssh-server libyaml-dev libicu-dev
-RUN apt-get install -y unzip
+
+# install drush make requirements
+RUN apt-get install -y unzip php5 php5-cli php5-curl
 
 # install drush
 RUN curl -sS https://getcomposer.org/installer | php
