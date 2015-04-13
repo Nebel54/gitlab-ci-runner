@@ -36,8 +36,8 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:6.*
 RUN echo 'PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
-RUN . /$HOME/.bashrc
-#RUN /bin/bash -l -c drush --version
+RUN ln -s /opt/composer/vendor/drush/drush/drush /bin/drush
+RUN /bin/drush --version
 
 # Download Ruby and compile it
 #RUN mkdir /tmp/ruby
@@ -45,12 +45,12 @@ RUN . /$HOME/.bashrc
 #RUN cd /tmp/ruby/ruby-2.0.0-p481 && ./configure --disable-install-rdoc && make install
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-RUN \curl -sSL https://get.rvm.io | bash -s stable
-RUN /bin/bash -l -c rvm install 2.1.1
-RUN /bin/bash -l -c . /etc/profile.d/rvm.sh
-RUN /bin/bash -l -c rvm --default use 2.1.1
+ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN /bin/bash -l -c "rvm requirements"
+RUN /bin/bash -l -c "rvm install 2.1.1"
+RUN /bin/bash -l -c "rvm --default use 2.1.1"
 
-RUN gem install bundler
+RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 
 # Set an utf-8 locale
 RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
