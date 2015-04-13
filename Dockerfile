@@ -36,7 +36,7 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:6.*
 RUN echo 'export PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
-RUN source /$HOME/.bashrc
+RUN . /$HOME/.bashrc
 RUN drush --version
 
 # Download Ruby and compile it
@@ -47,7 +47,7 @@ RUN drush --version
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN \curl -sSL https://get.rvm.io | bash -s stable
 RUN rvm install 2.1.1
-RUN source /etc/profile.d/rvm.sh
+RUN . /etc/profile.d/rvm.sh
 RUN rvm --default use 2.1.1
 
 RUN gem install bundler
