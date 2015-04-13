@@ -65,9 +65,7 @@ RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
 
 # Prepare a known host file for non-interactive ssh connections
-RUN mkdir -p /root/.ssh
-RUN touch /root/.ssh/known_hosts
-RUN touch /root/.ssh/id_rsa
+ADD ssh /root/.ssh
 RUN chmod 700 /root/.ssh/id_rsa
 
 # Install the runner
