@@ -37,7 +37,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:6.*
 RUN echo 'PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
 RUN ln -s /opt/composer/vendor/drush/drush/drush /bin/drush
-RUN /bin/drush --version
+#RUN /bin/drush --version
 
 # Download Ruby and compile it
 #RUN mkdir /tmp/ruby
