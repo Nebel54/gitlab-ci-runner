@@ -67,6 +67,9 @@ RUN update-locale LANG=en_US.UTF-8
 # Prepare a known host file for non-interactive ssh connections
 RUN mkdir -p /root/.ssh
 RUN touch /root/.ssh/known_hosts
+ADD $KEYFILE /root/.ssh/id_rsa
+RUN chmod 700 /root/.ssh/id_rsa
+RUN echo -e "Host $GITLAB_SERVER_FQDN\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 # Install the runner
 RUN curl --silent -L https://gitlab.com/gitlab-org/gitlab-ci-runner/repository/archive.tar.gz | tar xz
