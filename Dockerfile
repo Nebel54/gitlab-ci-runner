@@ -70,7 +70,7 @@ RUN touch /root/.ssh/known_hosts
 
 # Install the runner
 RUN curl --silent -L https://gitlab.com/gitlab-org/gitlab-ci-runner/repository/archive.tar.gz | tar xz
-RUN cd gitlab-ci-runner.git && bundle install --deployment
+RUN cd gitlab-ci-runner.git && /bin/bash -l -c "bundle install --deployment"
 
 WORKDIR /gitlab-ci-runner.git
 
