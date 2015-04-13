@@ -75,7 +75,7 @@ RUN cd gitlab-ci-runner.git && /bin/bash -l -c "bundle install --deployment"
 WORKDIR /gitlab-ci-runner.git
 
 # When the image is started add the remote server key, set up the runner and run it
-CMD ssh-keyscan -H $GITLAB_SERVER_FQDN >> /root/.ssh/known_hosts && bundle exec ./bin/setup_and_run
+CMD ssh-keyscan -H $GITLAB_SERVER_FQDN >> /root/.ssh/known_hosts && /bin/bash -l -c "bundle exec ./bin/setup_and_run"
 
 ## Optional dependencies
 ##
