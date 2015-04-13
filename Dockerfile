@@ -35,7 +35,7 @@ RUN apt-get install -y unzip php5 php5-cli php5-curl git
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require drush/drush:6.*
-RUN echo 'export PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
+RUN echo 'PATH="$HOME/.composer/vendor/drush/drush:$PATH"' >> /$HOME/.bashrc
 RUN . /$HOME/.bashrc
 RUN drush --version
 
