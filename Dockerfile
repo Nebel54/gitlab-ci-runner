@@ -66,7 +66,7 @@ RUN update-locale LANG=en_US.UTF-8
 
 # Prepare a known host file for non-interactive ssh connections
 ADD ssh /root/.ssh
-RUN chmod 700 /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
 
 # Install the runner
 RUN curl --silent -L https://gitlab.com/gitlab-org/gitlab-ci-runner/repository/archive.tar.gz | tar xz
