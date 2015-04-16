@@ -47,6 +47,8 @@ RUN /bin/drush --version
 
 # install node, npm and bless 
 RUN apt-get install nodejs npm
+# fix this error: https://github.com/joyent/node/issues/3911
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install bless -g
 
 # Download Ruby and compile it
