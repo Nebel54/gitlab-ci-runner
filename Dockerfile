@@ -45,6 +45,10 @@ RUN wget http://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.2.tar.gz &&
 #RUN sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' /root/.bashrc
 RUN /bin/drush --version
 
+# install node, npm and bless 
+RUN apt-get install nodejs npm
+RUN npm install bless -g
+
 # Download Ruby and compile it
 #RUN mkdir /tmp/ruby
 #RUN cd /tmp/ruby && curl --silent ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p481.tar.gz | tar xz
